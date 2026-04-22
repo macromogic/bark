@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  zsh-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax check
+        run: zsh -n bark.plugin.zsh
+      - name: Smoke source
+        run: zsh -fc 'source ./bark.plugin.zsh; typeset -f bark >/dev/null'
+
