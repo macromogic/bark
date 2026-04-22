@@ -4,13 +4,15 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   zsh-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Syntax check
         run: zsh -n bark.plugin.zsh
       - name: Smoke source
         run: zsh -fc 'source ./bark.plugin.zsh; typeset -f bark >/dev/null'
-
